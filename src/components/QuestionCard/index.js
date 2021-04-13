@@ -9,8 +9,11 @@ import {
   Text,
   Image,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { connect } from "react-redux";
-const QuestionCard = ({ id, users, questions }) => {
+import { handleSaveQuestionAnswer } from "../../actions/users";
+const QuestionCard = ({ id, users, questions, authedUser }) => {
+  const [radioValue, setRadioValue] = useState("");
   return (
     <>
       <Flex justifyContent="center" alignItems="center">
@@ -36,18 +39,36 @@ const QuestionCard = ({ id, users, questions }) => {
                       {" "}
                       Would You Rather ...
                     </Text>
-                    <RadioGroup defaultValue="2">
+                    <RadioGroup>
                       <VStack spacing={5} align="start">
-                        <Radio colorScheme="red" value="1">
+                        <Radio
+                          colorScheme="red"
+                          value="1"
+                          onChange={() => setRadioValue("optionOne")}
+                        >
                           a. {questions[id].optionOne.text}
                         </Radio>
-                        <Radio colorScheme="green" value="2">
+                        <Radio
+                          colorScheme="green"
+                          value="2"
+                          onChange={() => setRadioValue("optionTwo")}
+                        >
                           b. {questions[id].optionTwo.text}
                         </Radio>
                       </VStack>
                     </RadioGroup>
 
-                    <Button>Submit</Button>
+                    <Button
+                      onClick={() =>
+                        handleSaveQuestionAnswer(
+                          authedUser,
+                          questions[id].id,
+                          radioValue
+                        )
+                      }
+                    >
+                      Submit
+                    </Button>
                   </form>
                 </VStack>
               </Box>

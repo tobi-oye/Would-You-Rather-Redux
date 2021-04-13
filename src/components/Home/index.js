@@ -129,7 +129,10 @@ const Home = ({
           >
             {unansweredQuestionsList.map((answeredQuestion) => (
               <>
-                <li style={{ border: "1px solid black", margin: "20px" }}>
+                <li
+                  style={{ border: "1px solid black", margin: "20px" }}
+                  key={answeredQuestion.id}
+                >
                   <Flex flexDir="column" alignItems="flex-start">
                     <Box
                       border="1px solid black"
