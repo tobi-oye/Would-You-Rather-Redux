@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import { connect } from "react-redux";
 import { handleSaveQuestionAnswer } from "../../actions/users";
-const QuestionCard = ({ id, users, questions, authedUser }) => {
+const QuestionCard = ({ id, users, questions, authedUser, dispatch }) => {
   const [radioValue, setRadioValue] = useState("");
   return (
     <>
@@ -60,10 +60,12 @@ const QuestionCard = ({ id, users, questions, authedUser }) => {
 
                     <Button
                       onClick={() =>
-                        handleSaveQuestionAnswer(
-                          authedUser,
-                          questions[id].id,
-                          radioValue
+                        dispatch(
+                          handleSaveQuestionAnswer(
+                            authedUser,
+                            questions[id].id,
+                            radioValue
+                          )
                         )
                       }
                     >

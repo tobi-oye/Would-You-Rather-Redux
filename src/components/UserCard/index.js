@@ -3,7 +3,6 @@ import QuestionCard from "../QuestionCard";
 import ResultCard from "../ResultCard";
 
 const UserCard = ({ match, authedUser, checkQuestionId }) => {
-  console.log(checkQuestionId(match.params.id));
   return (
     <>
       {authedUser && checkQuestionId(match.params.id) ? (

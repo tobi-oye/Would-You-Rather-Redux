@@ -16,7 +16,6 @@ export function getInitialData() {
 
 export const saveQuestion = (question) => _saveQuestion(question);
 
-export const saveQuestionAnswer = (answerInfo) => {
-  const { authedUser, qId, answer } = answerInfo;
-  return _saveQuestionAnswer({ authedUser, qId, answer });
+export const saveQuestionAnswer = (authedUser, qid, answer) => {
+  return _saveQuestionAnswer({ authedUser, qid, answer });
 };

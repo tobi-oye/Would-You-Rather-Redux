@@ -17,7 +17,6 @@ const SignIn = ({ users, dispatch }) => {
   const authHandler = (id) => setAuthUser(id);
   const dispatchAuthUserHandler = (id) => dispatch(setAuthedUser(id));
 
-
   const userList = Object.values(users);
   return (
     <Flex justifyContent="center" alignItems="center" h="50vh">
@@ -48,7 +47,7 @@ const SignIn = ({ users, dispatch }) => {
             <Flex justifyContent="center">
               <Button
                 mt={4}
-                colorScheme="blue"
+                colorScheme="green"
                 w="100%"
                 onClick={() => dispatchAuthUserHandler(authUser)}
               >
