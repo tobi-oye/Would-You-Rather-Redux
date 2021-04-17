@@ -15,7 +15,7 @@ import sortBy from "sort-by";
 const Answered = ({ answeredQuestionsList, users, questions }) => {
   const history = useHistory();
 
-  let sortedAnsweredList = answeredQuestionsList.sort(sortBy("-timestamp"));
+  let sortedAnsweredList = answeredQuestionsList.sort(sortBy("timestamp"));
   return (
     <UnorderedList
       style={{
