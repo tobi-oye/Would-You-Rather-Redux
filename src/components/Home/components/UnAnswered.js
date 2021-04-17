@@ -14,7 +14,7 @@ import sortBy from "sort-by";
 
 const UnAnswered = ({ users, questions, unansweredQuestionsList }) => {
   const history = useHistory();
-  let sortedUnAnsweredList = unansweredQuestionsList.sort(sortBy("timestamp"));
+  let sortedUnAnsweredList = unansweredQuestionsList.sort(sortBy("-timestamp"));
   return (
     <UnorderedList
       style={{
@@ -25,52 +25,58 @@ const UnAnswered = ({ users, questions, unansweredQuestionsList }) => {
         border: "1px solid black",
       }}
     >
-      {sortedUnAnsweredList.map((answeredQuestion) => (
-        <ListItem
-          style={{ border: "1px solid black", margin: "20px" }}
-          key={answeredQuestion.id}
-        >
-          <Flex flexDir="column" alignItems="flex-start">
-            <Box
-              border="1px solid black"
-              w="100%"
-              mb="20px"
-              bgColor="grey"
-              p="5px"
-            >
-              {" "}
-              <Text fontWeight="700">
+      {sortedUnAnsweredList.map((answeredQuestion) => {
+        const timeStamp = new Date(answeredQuestion.timestamp);
+        return (
+          <ListItem
+            style={{ border: "1px solid black", margin: "20px" }}
+            key={answeredQuestion.id}
+          >
+            <Flex flexDir="column" alignItems="flex-start">
+              <Box
+                border="1px solid black"
+                w="100%"
+                mb="20px"
+                bgColor="grey"
+                p="5px"
+              >
                 {" "}
-                {users[answeredQuestion.author].name} asks
-              </Text>{" "}
-            </Box>
-
-            <Flex justifyContent="space-between">
-              <Image
-                src={users[answeredQuestion.author].avatarURL}
-                alt={users[answeredQuestion.author].name}
-                borderRadius="full"
-                boxSize="100px"
-              />
-              <VStack align="start" m="10px">
-                <Text>Would you rather</Text>
-                <Box maxW="100px">
+                <Text fontWeight="700">
                   {" "}
-                  <Text isTruncated>
-                    a. {questions[answeredQuestion.id].optionOne.text}
-                  </Text>
-                </Box>
-                <Button
-                  value={answeredQuestion.id}
-                  onClick={(e) => history.push(`/questions/${e.target.value}`)}
-                >
-                  View Poll
-                </Button>
-              </VStack>
+                  {users[answeredQuestion.author].name} asks
+                </Text>{" "}
+              </Box>
+
+              <Flex justifyContent="space-between">
+                <Image
+                  src={users[answeredQuestion.author].avatarURL}
+                  alt={users[answeredQuestion.author].name}
+                  borderRadius="full"
+                  boxSize="100px"
+                />
+                <VStack align="start" m="10px">
+                  <Text>Would you rather</Text>
+                  <Box maxW="100px">
+                    {" "}
+                    <Text isTruncated>
+                      a. {questions[answeredQuestion.id].optionOne.text}
+                    </Text>
+                  </Box>
+                  <Button
+                    value={answeredQuestion.id}
+                    onClick={(e) =>
+                      history.push(`/questions/${e.target.value}`)
+                    }
+                  >
+                    View Poll
+                  </Button>
+                  <Text>Time: {timeStamp.toUTCString()}</Text>
+                </VStack>
+              </Flex>
             </Flex>
-          </Flex>
-        </ListItem>
-      ))}
+          </ListItem>
+        );
+      })}
     </UnorderedList>
   );
 };
