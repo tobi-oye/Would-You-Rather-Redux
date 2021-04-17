@@ -10,20 +10,22 @@ import {
 } from "@chakra-ui/react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
+import sortBy from "sort-by";
 
 const Answered = ({ answeredQuestionsList, users, questions }) => {
   const history = useHistory();
+
+  let sortedAnsweredList = answeredQuestionsList.sort(sortBy("-timestamp"));
   return (
     <UnorderedList
       style={{
         listStyleType: "none",
         padding: "0",
         width: "100%",
-
         border: "1px solid black",
       }}
     >
-      {answeredQuestionsList.map((answeredQuestion) => (
+      {sortedAnsweredList.map((answeredQuestion) => (
         <ListItem
           style={{ border: "1px solid black", margin: "20px" }}
           key={answeredQuestion.id}
@@ -36,11 +38,9 @@ const Answered = ({ answeredQuestionsList, users, questions }) => {
               bgColor="grey"
               p="5px"
             >
-              {" "}
               <Text fontWeight="700">
-                {" "}
                 {users[answeredQuestion.author].name} asks
-              </Text>{" "}
+              </Text>
             </Box>
 
             <Flex justifyContent="space-between">

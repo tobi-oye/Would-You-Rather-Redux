@@ -13,7 +13,6 @@ export const questions = (state = {}, action) => {
       };
     case ADD_ANSWER_TO_QUESTION:
       const { authUser, qid, answer } = action;
-      console.log("---am here--");
       return {
         ...state,
         [qid]: {

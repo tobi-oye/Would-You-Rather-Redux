@@ -32,19 +32,71 @@ function App({ dispatch, authedUser }) {
             <Route
               exact
               path="/"
-              render={() => (authedUser ? <Home /> : <SignIn />)}
+              render={(props) =>
+                authedUser ? (
+                  <Home />
+                ) : (
+                  <Redirect
+                    to={{
+                      pathname: "/login",
+                      state: { from: props.location },
+                    }}
+                  />
+                )
+              }
             />
 
             <Route
               path="/questions/:id"
               component={authedUser ? UserCard : NoMatch}
             />
-            <Route path="/new" component={NewCard} />
-            <Route path="/leaderboard" component={LeaderBoard} />
+            <Route path="/login" component={SignIn} />
+            <Route
+              path="/new"
+              render={(props) =>
+                authedUser ? (
+                  <NewCard />
+                ) : (
+                  <Redirect
+                    to={{
+                      pathname: "/badUrl",
+                      state: { from: props.location },
+                    }}
+                  />
+                )
+              }
+            />
+            <Route
+              path="/leaderboard"
+              render={(props) =>
+                authedUser ? (
+                  <LeaderBoard />
+                ) : (
+                  <Redirect
+                    to={{
+                      pathname: "/badUrl",
+                      state: { from: props.location },
+                    }}
+                  />
+                )
+              }
+            />
             <Route path="/badUrl" component={NoMatch} />
-            <Route path="*">
-              <Redirect to="/" />
-            </Route>
+            <Route
+              path="*"
+              render={(props) =>
+                authedUser ? (
+                  <Home />
+                ) : (
+                  <Redirect
+                    to={{
+                      pathname: "/badUrl",
+                      state: { from: props.location },
+                    }}
+                  />
+                )
+              }
+            />
           </Switch>
         </GridItem>
       </Grid>

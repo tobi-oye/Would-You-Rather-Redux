@@ -60,6 +60,7 @@ const QuestionCard = ({ id, users, questions, authedUser, dispatch }) => {
 
                     <Button
                       onClick={() =>
+                        radioValue &&
                         dispatch(
                           handleSaveQuestionAnswer(
                             authedUser,

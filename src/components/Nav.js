@@ -25,16 +25,13 @@ const Nav = ({ authedUser, users, dispatch }) => {
         </BreadcrumbItem>
 
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} to={authedUser ? "/new" : "/badUrl"}>
+          <BreadcrumbLink as={Link} to="/new">
             New Question
           </BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink
-            as={Link}
-            to={authedUser ? "/leaderboard" : "/badUrl"}
-          >
+          <BreadcrumbLink as={Link} to="/leaderboard">
             Leader Board
           </BreadcrumbLink>
         </BreadcrumbItem>

@@ -9,15 +9,18 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 import { setAuthedUser } from "../../actions/authedUser";
 
-const SignIn = ({ users, dispatch }) => {
+const SignIn = ({ users, dispatch, location }) => {
   const [authUser, setAuthUser] = useState("");
+  const history = useHistory();
 
   const authHandler = (id) => setAuthUser(id);
   const dispatchAuthUserHandler = (id) => dispatch(setAuthedUser(id));
 
   const userList = Object.values(users);
+
   return (
     <Flex justifyContent="center" alignItems="center" h="50vh">
       <VStack>
@@ -49,7 +52,10 @@ const SignIn = ({ users, dispatch }) => {
                 mt={4}
                 colorScheme="green"
                 w="100%"
-                onClick={() => dispatchAuthUserHandler(authUser)}
+                onClick={() => {
+                  dispatchAuthUserHandler(authUser);
+                  return history.push(location.state.from.pathname);
+                }}
               >
                 Sign In
               </Button>
