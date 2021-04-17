@@ -13,7 +13,7 @@ const UserCard = ({ match, authedUser, checkQuestionId, questions }) => {
           <QuestionCard id={match.params.id} />
         )
       ) : (
-        <Redirect to="/" />
+        <Redirect to="/badUrl" />
       )}
     </>
   );
