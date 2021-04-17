@@ -54,7 +54,9 @@ const SignIn = ({ users, dispatch, location }) => {
                 w="100%"
                 onClick={() => {
                   dispatchAuthUserHandler(authUser);
-                  return history.push(location.state.from.pathname);
+                  return (
+                    location.state && history.push(location.state.from.pathname)
+                  );
                 }}
               >
                 Sign In
